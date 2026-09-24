@@ -12,15 +12,15 @@ on:
    workflow_dispatch:
 jobs:
    deploy:
-   name: Validar y desplegar
-   runs-on: ubuntu-latest
-   defaults:
-      run:
-        working-directory: bakehouse_analytics
-      env:
+     name: Validar y desplegar
+     runs-on: ubuntu-latest
+     defaults:
+       run:
+         working-directory: bakehouse_analytics
+     env:
          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_PROD }}
          DATABRICKS_BUNDLE_ENV: prod
-      steps:
+     steps:
         - uses: actions/checkout@v4
         - uses: databricks/setup-cli@main
         - name: Validar bundle
