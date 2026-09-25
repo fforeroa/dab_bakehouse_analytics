@@ -1,6 +1,8 @@
 {
   "datasets": [
     {
+      "name": "transactions_summary_metrics",
+      "displayName": "Transactions Summary Metrics",
       "config": {
         "dimensions": [
           {
@@ -21,7 +23,7 @@
             "format": {
               "currencyCode": "USD",
               "decimalPlaces": {
-                "places": 0,
+                "places": 0.0,
                 "type": "exact"
               },
               "type": "currency"
@@ -33,7 +35,7 @@
             "expr": "SUM(total_quantity)",
             "format": {
               "decimalPlaces": {
-                "places": 0,
+                "places": 0.0,
                 "type": "exact"
               },
               "type": "number"
@@ -43,22 +45,15 @@
         ],
         "source": "bakehouse_analytics_dev.rnd.transactions_summary",
         "version": "1.1"
-      },
-      "displayName": "Transactions Summary Metrics",
-      "name": "transactions_summary_metrics"
+      }
     }
   ],
   "pages": [
     {
+      "name": "b72c46b2",
       "displayName": "Untitled page",
       "layout": [
         {
-          "position": {
-            "height": 3,
-            "width": 12,
-            "x": 0,
-            "y": 0
-          },
           "widget": {
             "name": "ventas_totales",
             "queries": [
@@ -66,13 +61,13 @@
                 "name": "main_query",
                 "query": {
                   "datasetName": "transactions_summary_metrics",
-                  "disaggregated": false,
                   "fields": [
                     {
-                      "expression": "MEASURE(`total_sales`)",
-                      "name": "measure(total_sales)"
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
                     }
-                  ]
+                  ],
+                  "disaggregated": false
                 }
               }
             ],
@@ -93,15 +88,15 @@
               "version": 2,
               "widgetType": "counter"
             }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 3
           }
         },
         {
-          "position": {
-            "height": 6,
-            "width": 7,
-            "x": 0,
-            "y": 3
-          },
           "widget": {
             "name": "ventas_por_producto",
             "queries": [
@@ -109,17 +104,17 @@
                 "name": "main_query",
                 "query": {
                   "datasetName": "transactions_summary_metrics",
-                  "disaggregated": false,
                   "fields": [
                     {
-                      "expression": "`product`",
-                      "name": "product"
+                      "name": "product",
+                      "expression": "`product`"
                     },
                     {
-                      "expression": "MEASURE(`total_sales`)",
-                      "name": "measure(total_sales)"
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
                     }
-                  ]
+                  ],
+                  "disaggregated": false
                 }
               }
             ],
@@ -157,15 +152,15 @@
               "version": 3,
               "widgetType": "bar"
             }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 7,
+            "height": 6
           }
         },
         {
-          "position": {
-            "height": 6,
-            "width": 5,
-            "x": 7,
-            "y": 3
-          },
           "widget": {
             "name": "participacion_pago",
             "queries": [
@@ -173,17 +168,17 @@
                 "name": "main_query",
                 "query": {
                   "datasetName": "transactions_summary_metrics",
-                  "disaggregated": false,
                   "fields": [
                     {
-                      "expression": "MEASURE(`total_sales`)",
-                      "name": "measure(total_sales)"
+                      "name": "measure(total_sales)",
+                      "expression": "MEASURE(`total_sales`)"
                     },
                     {
-                      "expression": "`payment_method`",
-                      "name": "payment_method"
+                      "name": "payment_method",
+                      "expression": "`payment_method`"
                     }
-                  ]
+                  ],
+                  "disaggregated": false
                 }
               }
             ],
@@ -214,18 +209,23 @@
               "version": 3,
               "widgetType": "pie"
             }
+          },
+          "position": {
+            "x": 7,
+            "y": 3,
+            "width": 5,
+            "height": 6
           }
         }
       ],
-      "layoutVersion": "GRID_V1",
-      "name": "b72c46b2",
-      "pageType": "PAGE_TYPE_CANVAS"
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
     }
   ],
   "uiSettings": {
-    "applyModeEnabled": false,
     "theme": {
       "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
-    }
+    },
+    "applyModeEnabled": false
   }
 }
