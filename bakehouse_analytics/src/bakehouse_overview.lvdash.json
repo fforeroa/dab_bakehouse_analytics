@@ -1,0 +1,231 @@
+{
+  "datasets": [
+    {
+      "config": {
+        "dimensions": [
+          {
+            "displayName": "Producto",
+            "expr": "product",
+            "name": "product"
+          },
+          {
+            "displayName": "Método de pago",
+            "expr": "paymentMethod",
+            "name": "payment_method"
+          }
+        ],
+        "measures": [
+          {
+            "displayName": "Ventas totales",
+            "expr": "SUM(total_price)",
+            "format": {
+              "currencyCode": "USD",
+              "decimalPlaces": {
+                "places": 0,
+                "type": "exact"
+              },
+              "type": "currency"
+            },
+            "name": "total_sales"
+          },
+          {
+            "displayName": "Unidades totales",
+            "expr": "SUM(total_quantity)",
+            "format": {
+              "decimalPlaces": {
+                "places": 0,
+                "type": "exact"
+              },
+              "type": "number"
+            },
+            "name": "total_units"
+          }
+        ],
+        "source": "bakehouse_analytics_dev.rnd.transactions_summary",
+        "version": "1.1"
+      },
+      "displayName": "Transactions Summary Metrics",
+      "name": "transactions_summary_metrics"
+    }
+  ],
+  "pages": [
+    {
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "position": {
+            "height": 3,
+            "width": 12,
+            "x": 0,
+            "y": 0
+          },
+          "widget": {
+            "name": "ventas_totales",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "transactions_summary_metrics",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "MEASURE(`total_sales`)",
+                      "name": "measure(total_sales)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "data": {
+                "queryName": "main_query"
+              },
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(total_sales)",
+                  "rowNumber": 0
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Ventas totales"
+              },
+              "version": 2,
+              "widgetType": "counter"
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 6,
+            "width": 7,
+            "x": 0,
+            "y": 3
+          },
+          "widget": {
+            "name": "ventas_por_producto",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "transactions_summary_metrics",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`product`",
+                      "name": "product"
+                    },
+                    {
+                      "expression": "MEASURE(`total_sales`)",
+                      "name": "measure(total_sales)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "data": {
+                "queryName": "main_query"
+              },
+              "encodings": {
+                "color": {
+                  "displayName": "product",
+                  "fieldName": "product",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "x": {
+                  "displayName": "product",
+                  "fieldName": "product",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "displayName": "total_sales",
+                  "fieldName": "measure(total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Ventas totales por producto"
+              },
+              "version": 3,
+              "widgetType": "bar"
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 6,
+            "width": 5,
+            "x": 7,
+            "y": 3
+          },
+          "widget": {
+            "name": "participacion_pago",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "transactions_summary_metrics",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "MEASURE(`total_sales`)",
+                      "name": "measure(total_sales)"
+                    },
+                    {
+                      "expression": "`payment_method`",
+                      "name": "payment_method"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "data": {
+                "queryName": "main_query"
+              },
+              "encodings": {
+                "angle": {
+                  "displayName": "total_sales",
+                  "fieldName": "measure(total_sales)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "displayName": "payment_method",
+                  "fieldName": "payment_method",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Participación por método de pago"
+              },
+              "version": 3,
+              "widgetType": "pie"
+            }
+          }
+        }
+      ],
+      "layoutVersion": "GRID_V1",
+      "name": "b72c46b2",
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "applyModeEnabled": false,
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    }
+  }
+}
